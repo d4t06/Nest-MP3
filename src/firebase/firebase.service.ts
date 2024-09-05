@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
+import { convertToEn } from 'src/utils/helper';
+
+const folder = 'test';
+const storageUrl = `https://firebasestorage.googleapis.com/v0/b/zingmp3-clone-61799.appspot.com/o/${folder}%2F`;
 
 @Injectable()
 export class FirebaseService {
@@ -18,9 +22,12 @@ export class FirebaseService {
     const { buffer, mimetype, originalname } = file;
 
     const start = new Date();
-
     const bucket = admin.storage().bucket();
-    const bucketFile = bucket.file(`test/${originalname}`);
+
+    const filename = `${convertToEn(originalname)}_${Date.now()}`;
+    const filePath = `${folder}/${filename}`;
+
+    const bucketFile = bucket.file(filePath);
 
     await bucketFile.save(buffer, {
       contentType: mimetype,
@@ -37,8 +44,14 @@ export class FirebaseService {
       's',
     );
 
-    // console.log(
-    //   `https://firebasestorage.googleapis.com/v0/b/zingmp3-clone-61799.appspot.com/o/test%2F${originalname}?alt=media`,
-    // );
+    return {
+      filePath,
+      url: `${storageUrl}${filename}?alt=media`,
+    };
+  }
+
+  async deleteFile(filePath: string) {
+    const bucket = admin.storage().bucket();
+    return await bucket.file(filePath).delete();
   }
 }

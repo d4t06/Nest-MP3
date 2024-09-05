@@ -15,9 +15,9 @@ export class CloudinaryService {
     const start = new Date();
 
     const b64 = Buffer.from(buffer).toString('base64');
-    let dataURI = 'data:' + mimetype + ';base64,' + b64;
+     let dataURI = 'data:' + mimetype + ';base64,' + b64;
 
-    await v2.uploader.upload(dataURI, {
+    const res = await v2.uploader.upload(dataURI, {
       folder: 'next-mp3',
       resource_type: 'auto',
     });
@@ -27,6 +27,8 @@ export class CloudinaryService {
       (new Date().getTime() - start.getTime()) / 1000,
       's',
     );
+
+    return res;
 
     // return imageUploadRes;
   }
