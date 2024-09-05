@@ -1,2 +1,26 @@
 ###
 GET http://localhost:4000/api
+
+###
+POST http://localhost:4000/api/auth/login
+Content-Type: application/json
+
+{
+    "password": "123"
+}
+
+
+###
+POST http://localhost:4000/api/songs
+Content-Type: multipart/form-data
+
+{
+    "name":"Take Me To Infinity - Consoul Trainin",
+    "singer":"Consoul Trainin",
+    "image_url":"",
+    "duration":207,
+    "image_file_path":"",
+    "size":3249,
+    "song_url": "https://firebasestorage.googleapis.com/v0/b/zingmp3-clone-61799.appspot.com/o/test%2Fhuudat01234560-takemetoinfinity-consoultrainin-4723303-mp3_1725508669802?alt=media",
+    "song_file_path": ""
+}

@@ -6,7 +6,9 @@ export class AuthService {
   constructor(private readonly jwtService: JwtService) {}
 
   async signIn(password: string) {
-    if (password !== process.env.ADMIN_PASS) {
+    console.log('check pass', password);
+
+    if (!password || password !== process.env.ADMIN_PASS) {
       throw new UnauthorizedException();
     }
 

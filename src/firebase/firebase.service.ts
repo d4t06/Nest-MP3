@@ -33,10 +33,10 @@ export class FirebaseService {
       contentType: mimetype,
     });
 
-    // const res = await bucketFile.getSignedUrl({
-    //   action: 'read',
-    //   expires: '01-01-2050',
-    // });
+    const res = await bucketFile.getSignedUrl({
+      action: 'read',
+      expires: '01-01-2050',
+    });
 
     console.log(
       'upload file finish after ',

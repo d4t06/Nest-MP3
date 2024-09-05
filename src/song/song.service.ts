@@ -4,6 +4,7 @@ import { CreateSongDto } from './entities/dtos/create-song.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Song } from './entities/song.entity';
 import { Repository } from 'typeorm';
+import { UpdateSongDto } from './entities/dtos/update-song.dto';
 
 @Injectable()
 export class SongService {
@@ -14,8 +15,22 @@ export class SongService {
     private readonly firebaseService: FirebaseService,
   ) {}
 
+  async findAll() {
+    const [songs, count] = await this.songRepository.findAndCount({
+      order: {
+        name: 'ASC',
+      },
+    });
+
+    return { songs, count };
+  }
+
   create(dto: CreateSongDto) {
     return this.songRepository.save(dto);
+  }
+
+  async update(id: number, dto: UpdateSongDto) {
+    return await this.songRepository.update(id, dto);
   }
 
   async delete(id: number) {

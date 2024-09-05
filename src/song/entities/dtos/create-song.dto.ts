@@ -1,8 +1,9 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsInt, IsNotEmpty } from 'class-validator';
 
 export class CreateSongDto {
   @IsNotEmpty()
   name: string;
+
   @IsNotEmpty()
   singer: string;
 
@@ -11,10 +12,13 @@ export class CreateSongDto {
 
   @IsNotEmpty()
   song_url: string;
+
   @IsNotEmpty()
   song_file_path: string;
-  @IsNotEmpty()
+
+  @IsInt()
   duration: number;
-  @IsNotEmpty()
+
+  @IsInt()
   size: number;
 }

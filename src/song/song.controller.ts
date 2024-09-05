@@ -7,7 +7,6 @@ import {
   ParseIntPipe,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
 import { SongService } from './song.service';
 import { CreateSongDto } from './entities/dtos/create-song.dto';
@@ -19,20 +18,32 @@ export class SongController {
   constructor(private readonly songService: SongService) {}
 
   @Get()
-  findAll(
-    @Query('page') page: string = '1',
-    @Query('size') size: string = '12',
-  ) {}
-
-  @Post()
-  @CustomResponse('Create song success ful')
-  create(@Body() dto: CreateSongDto) {
-    return this.songService.create(dto);
+  @CustomResponse('Get all songs successful')
+  findAll() {
+    return this.songService.findAll();
   }
 
-  @Put('id:number')
-  edit(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateSongDto) {}
+  @Get('search')
+  @CustomResponse('Search song success ful')
+  search() {
+    return 'Search route';
+  }
 
-  @Delete('id: number')
-  delete() {}
+  @Post()
+  @CustomResponse('Create song successful')
+  // @UsePipes(new ValidationPipe())
+  create(@Body() createSongDto: CreateSongDto) {
+    return this.songService.create(createSongDto);
+  }
+
+  @Put(':id')
+  // @UsePipes(ValidationPipe)
+  edit(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateSongDto) {
+    return this.songService.update(id, dto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.songService.delete(id);
+  }
 }
