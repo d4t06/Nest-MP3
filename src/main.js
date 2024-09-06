@@ -7,7 +7,11 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.enableCors({
         credentials: true,
-        origin: ['http://localhost:3000', 'https://next-mp3.vercel.app'],
+        origin: [
+            'http://localhost:3000',
+            'https://next-mp3.vercel.app',
+            'https://d4t06.github.io',
+        ],
     });
     app.setGlobalPrefix('api');
     app.useGlobalPipes(new common_1.ValidationPipe());
