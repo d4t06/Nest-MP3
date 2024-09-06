@@ -12,13 +12,12 @@ const song_controller_1 = require("./song.controller");
 const song_service_1 = require("./song.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const song_entity_1 = require("./entities/song.entity");
-const firebase_module_1 = require("../firebase/firebase.module");
 let SongModule = class SongModule {
 };
 exports.SongModule = SongModule;
 exports.SongModule = SongModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([song_entity_1.Song]), firebase_module_1.FirebaseModule],
+        imports: [typeorm_1.TypeOrmModule.forFeature([song_entity_1.Song])],
         controllers: [song_controller_1.SongController],
         providers: [song_service_1.SongService],
     })

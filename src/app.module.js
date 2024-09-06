@@ -13,8 +13,6 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const song_module_1 = require("./song/song.module");
 const database_module_1 = require("./database/database.module");
-const file_module_1 = require("./file/file.module");
-const firebase_module_1 = require("./firebase/firebase.module");
 const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
@@ -26,10 +24,8 @@ exports.AppModule = AppModule = __decorate([
                 envFilePath: ['.env.local'],
                 isGlobal: true,
             }),
-            firebase_module_1.FirebaseModule,
             song_module_1.SongModule,
             database_module_1.DatabaseModule,
-            file_module_1.FileModule,
             auth_module_1.AuthModule,
         ],
         providers: [app_service_1.AppService],

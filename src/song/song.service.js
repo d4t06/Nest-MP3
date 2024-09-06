@@ -14,14 +14,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SongService = void 0;
 const common_1 = require("@nestjs/common");
-const firebase_service_1 = require("../firebase/firebase.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const song_entity_1 = require("./entities/song.entity");
 const typeorm_2 = require("typeorm");
 let SongService = class SongService {
-    constructor(songRepository, firebaseService) {
+    constructor(songRepository) {
         this.songRepository = songRepository;
-        this.firebaseService = firebaseService;
     }
     async findAll() {
         const [songs, count] = await this.songRepository.findAndCount({
@@ -41,7 +39,6 @@ let SongService = class SongService {
         const founded = await this.songRepository.findOne({ where: { id } });
         if (!founded)
             throw new common_1.NotFoundException('');
-        await this.firebaseService.deleteFile(founded.song_file_path);
         await this.songRepository.delete(id);
     }
 };
@@ -49,8 +46,6 @@ exports.SongService = SongService;
 exports.SongService = SongService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(song_entity_1.Song)),
-    __param(1, (0, common_1.Inject)()),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        firebase_service_1.FirebaseService])
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], SongService);
 //# sourceMappingURL=song.service.js.map
