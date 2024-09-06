@@ -13,8 +13,9 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.use(bodyParse.urlencoded({
+        type: 'multipart/form-data',
         extended: true,
-        parameterLimit: 5000000,
+        parameterLimit: 9000000,
     }));
     await app.listen(process.env.PORT || 4000, () => {
         console.log(`App running on port:${process.env.PORT}`);
