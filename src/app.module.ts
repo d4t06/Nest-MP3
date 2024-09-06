@@ -4,9 +4,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SongModule } from './song/song.module';
 import { DatabaseModule } from './database/database.module';
-import { FileModule } from './file/file.module';
-import { FirebaseService } from './firebase/firebase.service';
-import { FirebaseModule } from './firebase/firebase.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -15,10 +12,8 @@ import { AuthModule } from './auth/auth.module';
       envFilePath: ['.env.local'],
       isGlobal: true,
     }),
-    FirebaseModule,
     SongModule,
     DatabaseModule,
-    FileModule,
     AuthModule,
   ],
   providers: [AppService],

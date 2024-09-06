@@ -3,10 +3,9 @@ import { SongController } from './song.controller';
 import { SongService } from './song.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Song } from './entities/song.entity';
-import { FirebaseModule } from 'src/firebase/firebase.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Song]), FirebaseModule],
+  imports: [TypeOrmModule.forFeature([Song])],
   controllers: [SongController],
   providers: [SongService],
 })
