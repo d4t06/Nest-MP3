@@ -31,9 +31,6 @@ __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', {
         storage: (0, multer_1.memoryStorage)(),
-        limits: {
-            fileSize: 10 * 1024 * 1024
-        },
     }), new custom_response_interceptor_1.CustomResponseInterceptor('Upload file successful')),
     __param(0, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
