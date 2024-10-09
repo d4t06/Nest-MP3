@@ -5,6 +5,8 @@ import { AppService } from './app.service';
 import { SongModule } from './song/song.module';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
+import { LyricModule } from './lyric/lyric.module';
+import { SongLyricModule } from './song-lyric/song-lyric.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { AuthModule } from './auth/auth.module';
     SongModule,
     DatabaseModule,
     AuthModule,
+    LyricModule,
+    SongLyricModule,
   ],
   providers: [AppService],
   controllers: [AppController],

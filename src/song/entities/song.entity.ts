@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { SongLyric } from 'src/song-lyric/entities/song-lyric.entity';
+import {
+  Column,
+  Entity,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'Songs' })
 export class Song {
@@ -20,6 +26,10 @@ export class Song {
   duration: number;
   @Column()
   size: number;
+
+  /** */
+  @OneToOne(() => SongLyric, (l) => l.song)
+  song_lyric: SongLyric;
 
   constructor(item: Partial<Song>) {
     Object.assign(this, item);
