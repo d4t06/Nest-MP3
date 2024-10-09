@@ -6,4 +6,7 @@ export class CreateSongLyricDto {
 
   @IsNotEmpty()
   base_lyric: string;
+
+  @IsNotEmpty()
+  lyrics: string;
 }

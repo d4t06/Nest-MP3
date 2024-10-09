@@ -15,17 +15,19 @@ export class SongLyric {
   id: number;
 
   @Column()
-  song_id: number;
-
-  @Column()
   base_lyric: string;
+
+  // @OneToMany(() => Lyric, (l) => l.song, { onDelete: 'CASCADE' })
+  @Column()
+  lyrics: string;
+
+  /** */
+  @Column()
+  song_id: number;
 
   @OneToOne(() => Song, (s) => s.song_lyric, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'song_id' })
   song: Song;
-
-  @OneToMany(() => Lyric, (l) => l.song, { onDelete: 'CASCADE' })
-  lyrics: Lyric[];
 
   constructor(item: Partial<SongLyric>) {
     Object.assign(this, item);

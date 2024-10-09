@@ -14,9 +14,6 @@ export class SongLyricService {
 
   async findBySongId(songId: number) {
     return this.songLyricRepository.findOne({
-      relations: {
-        lyrics: true,
-      },
       where: { song_id: songId },
     });
   }
