@@ -26,6 +26,13 @@ export class SongService {
     return { songs, count };
   }
 
+  async findOne(songId: number) {
+    return await this.songRepository.findOne({
+      where: { id: songId },
+      relations: { song_lyric: true },
+    });
+  }
+
   async create(dto: CreateSongDto) {
     const newSong = await this.songRepository.save(dto);
 

@@ -12,6 +12,15 @@ export class SongLyricService {
     private readonly songLyricRepository: Repository<SongLyric>,
   ) {}
 
+  async findBySongId(songId: number) {
+    return this.songLyricRepository.findOne({
+      relations: {
+        lyrics: true,
+      },
+      where: { song_id: songId },
+    });
+  }
+
   async add(dto: CreateSongLyricDto) {
     return this.songLyricRepository.save(dto);
   }

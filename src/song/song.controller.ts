@@ -23,6 +23,12 @@ export class SongController {
     return this.songService.findAll();
   }
 
+  @Get(':song_id')
+  @CustomResponse('Get all songs successful')
+  findOneById(@Param("song_id", ParseIntPipe) songId: number) {
+    return this.songService.findOne(songId)
+  }
+
   @Get('search')
   @CustomResponse('Search song success ful')
   search() {
