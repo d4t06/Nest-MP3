@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Song = void 0;
+const song_lyric_entity_1 = require("../../song-lyric/entities/song-lyric.entity");
 const typeorm_1 = require("typeorm");
 let Song = class Song {
     constructor(item) {
@@ -53,6 +54,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
 ], Song.prototype, "size", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => song_lyric_entity_1.SongLyric, (l) => l.song),
+    __metadata("design:type", song_lyric_entity_1.SongLyric)
+], Song.prototype, "song_lyric", void 0);
 exports.Song = Song = __decorate([
     (0, typeorm_1.Entity)({ name: 'Songs' }),
     __metadata("design:paramtypes", [Object])

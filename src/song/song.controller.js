@@ -25,6 +25,9 @@ let SongController = class SongController {
     findAll() {
         return this.songService.findAll();
     }
+    findOneById(songId) {
+        return this.songService.findOne(songId);
+    }
     search() {
         return 'Search route';
     }
@@ -46,6 +49,14 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], SongController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)(':song_id'),
+    (0, custom_response_decorator_1.CustomResponse)('Get all songs successful'),
+    __param(0, (0, common_1.Param)("song_id", common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], SongController.prototype, "findOneById", null);
 __decorate([
     (0, common_1.Get)('search'),
     (0, custom_response_decorator_1.CustomResponse)('Search song success ful'),

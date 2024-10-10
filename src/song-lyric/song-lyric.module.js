@@ -6,21 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SongModule = void 0;
+exports.SongLyricModule = void 0;
 const common_1 = require("@nestjs/common");
-const song_controller_1 = require("./song.controller");
-const song_service_1 = require("./song.service");
+const song_lyric_service_1 = require("./song-lyric.service");
+const song_lyric_controller_1 = require("./song-lyric.controller");
 const typeorm_1 = require("@nestjs/typeorm");
-const song_entity_1 = require("./entities/song.entity");
-const song_lyric_entity_1 = require("../song-lyric/entities/song-lyric.entity");
-let SongModule = class SongModule {
+const song_lyric_entity_1 = require("./entities/song-lyric.entity");
+const lyric_module_1 = require("../lyric/lyric.module");
+let SongLyricModule = class SongLyricModule {
 };
-exports.SongModule = SongModule;
-exports.SongModule = SongModule = __decorate([
+exports.SongLyricModule = SongLyricModule;
+exports.SongLyricModule = SongLyricModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([song_entity_1.Song, song_lyric_entity_1.SongLyric])],
-        controllers: [song_controller_1.SongController],
-        providers: [song_service_1.SongService],
+        providers: [song_lyric_service_1.SongLyricService],
+        controllers: [song_lyric_controller_1.SongLyricController],
+        imports: [lyric_module_1.LyricModule, typeorm_1.TypeOrmModule.forFeature([song_lyric_entity_1.SongLyric])],
     })
-], SongModule);
-//# sourceMappingURL=song.module.js.map
+], SongLyricModule);
+//# sourceMappingURL=song-lyric.module.js.map

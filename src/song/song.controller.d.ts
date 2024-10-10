@@ -8,6 +8,7 @@ export declare class SongController {
         songs: import("./entities/song.entity").Song[];
         count: number;
     }>;
+    findOneById(songId: number): Promise<import("./entities/song.entity").Song>;
     search(): string;
     create(createSongDto: CreateSongDto): Promise<CreateSongDto & import("./entities/song.entity").Song>;
     edit(id: number, dto: UpdateSongDto): Promise<import("typeorm").UpdateResult>;

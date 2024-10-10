@@ -1,3 +1,4 @@
+import { SongLyric } from 'src/song-lyric/entities/song-lyric.entity';
 export declare class Song {
     id: number;
     name: string;
@@ -8,5 +9,6 @@ export declare class Song {
     song_file_path: string;
     duration: number;
     size: number;
+    song_lyric: SongLyric;
     constructor(item: Partial<Song>);
 }
