@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SongLyricController = void 0;
 const common_1 = require("@nestjs/common");
 const song_lyric_service_1 = require("./song-lyric.service");
-const update_song_lyric_dto_1 = require("./entities/dtos/update-song-lyric.dto");
 const create_song_lyric_dto_1 = require("./entities/dtos/create-song-lyric.dto");
 const custom_response_decorator_1 = require("../system/custom-response/custom-response.decorator");
+const auth_guard_1 = require("../auth/guards/auth.guard");
 let SongLyricController = class SongLyricController {
     constructor(songLyricService) {
         this.songLyricService = songLyricService;
@@ -27,9 +27,6 @@ let SongLyricController = class SongLyricController {
     }
     addBaseLyric(dto) {
         return this.songLyricService.add(dto);
-    }
-    updateBaseLyric(id, dto) {
-        return this.songLyricService.update(id, dto);
     }
 };
 exports.SongLyricController = SongLyricController;
@@ -43,21 +40,13 @@ __decorate([
 ], SongLyricController.prototype, "getSongLyric", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, custom_response_decorator_1.CustomResponse)('Add  lyric successful'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_song_lyric_dto_1.CreateSongLyricDto]),
     __metadata("design:returntype", void 0)
 ], SongLyricController.prototype, "addBaseLyric", null);
-__decorate([
-    (0, common_1.Put)(':id'),
-    (0, custom_response_decorator_1.CustomResponse)('Update  lyric successful'),
-    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, update_song_lyric_dto_1.UpdateSongLyricDto]),
-    __metadata("design:returntype", void 0)
-], SongLyricController.prototype, "updateBaseLyric", null);
 exports.SongLyricController = SongLyricController = __decorate([
     (0, common_1.Controller)('song-lyrics'),
     __metadata("design:paramtypes", [song_lyric_service_1.SongLyricService])

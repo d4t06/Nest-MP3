@@ -17,11 +17,9 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const song_entity_1 = require("./entities/song.entity");
 const typeorm_2 = require("typeorm");
-const song_lyric_entity_1 = require("../song-lyric/entities/song-lyric.entity");
 let SongService = class SongService {
-    constructor(songRepository, songLyricRepository) {
+    constructor(songRepository) {
         this.songRepository = songRepository;
-        this.songLyricRepository = songLyricRepository;
     }
     async findAll() {
         const [songs, count] = await this.songRepository.findAndCount({
@@ -38,12 +36,7 @@ let SongService = class SongService {
         });
     }
     async create(dto) {
-        const newSong = await this.songRepository.save(dto);
-        await this.songLyricRepository.save({
-            base_lyric: '',
-            song_id: newSong.id,
-        });
-        return newSong;
+        return await this.songRepository.save(dto);
     }
     async update(id, dto) {
         return await this.songRepository.update(id, dto);
@@ -59,8 +52,6 @@ exports.SongService = SongService;
 exports.SongService = SongService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(song_entity_1.Song)),
-    __param(1, (0, typeorm_1.InjectRepository)(song_lyric_entity_1.SongLyric)),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], SongService);
 //# sourceMappingURL=song.service.js.map

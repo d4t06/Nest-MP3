@@ -27,10 +27,7 @@ let SongLyricService = class SongLyricService {
         });
     }
     async add(dto) {
-        return this.songLyricRepository.save(dto);
-    }
-    async update(id, dto) {
-        await this.songLyricRepository.update(id, dto);
+        return await this.songLyricRepository.save(dto);
     }
 };
 exports.SongLyricService = SongLyricService;

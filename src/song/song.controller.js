@@ -18,6 +18,7 @@ const song_service_1 = require("./song.service");
 const create_song_dto_1 = require("./entities/dtos/create-song.dto");
 const custom_response_decorator_1 = require("../system/custom-response/custom-response.decorator");
 const update_song_dto_1 = require("./entities/dtos/update-song.dto");
+const auth_guard_1 = require("../auth/guards/auth.guard");
 let SongController = class SongController {
     constructor(songService) {
         this.songService = songService;
@@ -52,7 +53,7 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':song_id'),
     (0, custom_response_decorator_1.CustomResponse)('Get all songs successful'),
-    __param(0, (0, common_1.Param)("song_id", common_1.ParseIntPipe)),
+    __param(0, (0, common_1.Param)('song_id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
@@ -66,6 +67,7 @@ __decorate([
 ], SongController.prototype, "search", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, custom_response_decorator_1.CustomResponse)('Create song successful'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -74,6 +76,7 @@ __decorate([
 ], SongController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':id'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -82,6 +85,7 @@ __decorate([
 ], SongController.prototype, "edit", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
