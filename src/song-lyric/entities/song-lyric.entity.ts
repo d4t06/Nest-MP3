@@ -14,11 +14,11 @@ export class SongLyric {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'text' })
   base_lyric: string;
 
   // @OneToMany(() => Lyric, (l) => l.song, { onDelete: 'CASCADE' })
-  @Column()
+  @Column({ type: 'text' })
   lyrics: string;
 
   /** */
