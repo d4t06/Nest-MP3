@@ -19,10 +19,10 @@ export class SongLyricService {
   }
 
   async add(dto: CreateSongLyricDto) {
-    return this.songLyricRepository.save(dto);
+    return await this.songLyricRepository.save(dto);
   }
 
-  async update(id: number, dto: UpdateSongLyricDto) {
-    await this.songLyricRepository.update(id, dto);
-  }
+  //   async update(id: number, dto: UpdateSongLyricDto) {
+  //     await this.songLyricRepository.update(id, dto);
+  //   }
 }
