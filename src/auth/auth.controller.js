@@ -16,6 +16,7 @@ exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const class_validator_1 = require("class-validator");
+const custom_response_decorator_1 = require("../system/custom-response/custom-response.decorator");
 class SignInDto {
 }
 __decorate([
@@ -29,15 +30,27 @@ let AuthController = class AuthController {
     signIn(signInDto) {
         return this.authService.signIn(signInDto.password);
     }
+    refreshToken(body) {
+        return this.authService.refreshToken(body.refresh_token);
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
     (0, common_1.Post)('/login'),
+    (0, custom_response_decorator_1.CustomResponse)('Login successful'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [SignInDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "signIn", null);
+__decorate([
+    (0, common_1.Post)('/refresh'),
+    (0, custom_response_decorator_1.CustomResponse)('Refresh token successful'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "refreshToken", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

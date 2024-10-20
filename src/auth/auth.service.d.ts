@@ -4,5 +4,9 @@ export declare class AuthService {
     constructor(jwtService: JwtService);
     signIn(password: string): Promise<{
         token: string;
+        refresh_token: string;
+    }>;
+    refreshToken(token: string): Promise<{
+        token: string;
     }>;
 }

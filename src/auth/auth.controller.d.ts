@@ -7,6 +7,12 @@ export declare class AuthController {
     constructor(authService: AuthService);
     signIn(signInDto: SignInDto): Promise<{
         token: string;
+        refresh_token: string;
+    }>;
+    refreshToken(body: {
+        refresh_token: string;
+    }): Promise<{
+        token: string;
     }>;
 }
 export {};

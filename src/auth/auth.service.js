@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
+const TOKEN_EXPIRED = '1h';
+const REFRESH_EXPIRED = '1d';
 let AuthService = class AuthService {
     constructor(jwtService) {
         this.jwtService = jwtService;
@@ -21,10 +23,26 @@ let AuthService = class AuthService {
         if (!password || password !== process.env.ADMIN_PASS) {
             throw new common_1.UnauthorizedException();
         }
-        const newToken = await this.jwtService.signAsync({}, { expiresIn: '2d' });
+        const newToken = await this.jwtService.signAsync({}, { expiresIn: TOKEN_EXPIRED });
+        const newRefreshToken = await this.jwtService.signAsync({}, { expiresIn: REFRESH_EXPIRED });
         return {
             token: newToken,
+            refresh_token: newRefreshToken,
         };
+    }
+    async refreshToken(token) {
+        try {
+            if (!token)
+                throw new common_1.UnauthorizedException();
+            await this.jwtService.verify(token);
+            const newToken = await this.jwtService.signAsync({}, { expiresIn: TOKEN_EXPIRED });
+            return {
+                token: newToken,
+            };
+        }
+        catch (err) {
+            throw new common_1.UnauthorizedException();
+        }
     }
 };
 exports.AuthService = AuthService;
