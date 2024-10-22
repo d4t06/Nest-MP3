@@ -11,6 +11,7 @@ async function bootstrap() {
             'http://localhost:3000',
             'https://next-mp3.vercel.app',
             'https://d4t06.github.io',
+            'https://d4t06-test.tiiny.site',
         ],
     });
     app.setGlobalPrefix('api');
