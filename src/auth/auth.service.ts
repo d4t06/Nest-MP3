@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 const TOKEN_EXPIRED = '1h';
-const REFRESH_EXPIRED = '1d';
+const REFRESH_EXPIRED = '30d';
 
 @Injectable()
 export class AuthService {
@@ -17,11 +17,17 @@ export class AuthService {
 
     const newToken = await this.jwtService.signAsync(
       {},
-      { expiresIn: TOKEN_EXPIRED },
+      {
+        expiresIn: TOKEN_EXPIRED,
+        secret: process.env.JWT_SECRET,
+      },
     );
     const newRefreshToken = await this.jwtService.signAsync(
       {},
-      { expiresIn: REFRESH_EXPIRED },
+      {
+        expiresIn: REFRESH_EXPIRED,
+        secret: process.env.JWT_SECRET,
+      },
     );
 
     return {
@@ -30,16 +36,17 @@ export class AuthService {
     };
   }
 
-
   async refreshToken(token: string) {
     try {
       if (!token) throw new UnauthorizedException();
 
-      await this.jwtService.verify(token);
+      await this.jwtService.verifyAsync(token, {
+        secret: process.env.JWT_SECRET,
+      });
 
       const newToken = await this.jwtService.signAsync(
         {},
-        { expiresIn: TOKEN_EXPIRED },
+        { expiresIn: TOKEN_EXPIRED, secret: process.env.JWT_SECRET },
       );
 
       return {

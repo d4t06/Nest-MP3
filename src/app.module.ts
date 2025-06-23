@@ -5,8 +5,9 @@ import { AppService } from './app.service';
 import { SongModule } from './song/song.module';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
-import { LyricModule } from './lyric/lyric.module';
 import { SongLyricModule } from './song-lyric/song-lyric.module';
+import { StorageService } from './storage/storage.service';
+import { StorageModule } from './storage/storage.module';
 
 @Module({
   imports: [
@@ -17,10 +18,10 @@ import { SongLyricModule } from './song-lyric/song-lyric.module';
     SongModule,
     DatabaseModule,
     AuthModule,
-    LyricModule,
     SongLyricModule,
+    StorageModule,
   ],
-  providers: [AppService],
+  providers: [AppService, StorageService],
   controllers: [AppController],
 })
 export class AppModule {}

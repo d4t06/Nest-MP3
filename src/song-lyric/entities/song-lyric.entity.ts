@@ -1,4 +1,3 @@
-import { Lyric } from 'src/lyric/entities/lyric.entity';
 import { Song } from 'src/song/entities/song.entity';
 import {
   Column,
