@@ -14,8 +14,9 @@ const app_service_1 = require("./app.service");
 const song_module_1 = require("./song/song.module");
 const database_module_1 = require("./database/database.module");
 const auth_module_1 = require("./auth/auth.module");
-const lyric_module_1 = require("./lyric/lyric.module");
 const song_lyric_module_1 = require("./song-lyric/song-lyric.module");
+const storage_service_1 = require("./storage/storage.service");
+const storage_module_1 = require("./storage/storage.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -29,10 +30,10 @@ exports.AppModule = AppModule = __decorate([
             song_module_1.SongModule,
             database_module_1.DatabaseModule,
             auth_module_1.AuthModule,
-            lyric_module_1.LyricModule,
             song_lyric_module_1.SongLyricModule,
+            storage_module_1.StorageModule,
         ],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, storage_service_1.StorageService],
         controllers: [app_controller_1.AppController],
     })
 ], AppModule);

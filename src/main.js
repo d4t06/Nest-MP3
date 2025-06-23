@@ -5,19 +5,16 @@ const app_module_1 = require("./app.module");
 const common_1 = require("@nestjs/common");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    const PORT = process.env.PORT || 4000;
+    const WHITE_LIST = process.env?.WHITE_LIST?.split(', ') || [];
     app.enableCors({
         credentials: true,
-        origin: [
-            'http://localhost:3000',
-            'https://next-mp3.vercel.app',
-            'https://d4t06.github.io',
-            'https://d4t06-test.tiiny.site',
-        ],
+        origin: WHITE_LIST,
     });
     app.setGlobalPrefix('api');
     app.useGlobalPipes(new common_1.ValidationPipe());
-    await app.listen(process.env.PORT || 4000, () => {
-        console.log(`App running on port:${process.env.PORT}`);
+    await app.listen(PORT, () => {
+        console.log(`App running on port: ${PORT}`);
     });
 }
 bootstrap();

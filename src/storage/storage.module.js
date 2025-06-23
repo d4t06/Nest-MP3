@@ -6,19 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LyricModule = void 0;
+exports.StorageModule = void 0;
 const common_1 = require("@nestjs/common");
-const lyric_service_1 = require("./lyric.service");
-const typeorm_1 = require("@nestjs/typeorm");
-const lyric_entity_1 = require("./entities/lyric.entity");
-let LyricModule = class LyricModule {
+const storage_controller_1 = require("./storage.controller");
+const storage_service_1 = require("./storage.service");
+let StorageModule = class StorageModule {
 };
-exports.LyricModule = LyricModule;
-exports.LyricModule = LyricModule = __decorate([
+exports.StorageModule = StorageModule;
+exports.StorageModule = StorageModule = __decorate([
     (0, common_1.Module)({
-        providers: [lyric_service_1.LyricService],
-        imports: [typeorm_1.TypeOrmModule.forFeature([lyric_entity_1.Lyric])],
-        exports: [lyric_service_1.LyricService]
+        controllers: [storage_controller_1.StorageController],
+        providers: [storage_service_1.StorageService]
     })
-], LyricModule);
-//# sourceMappingURL=lyric.module.js.map
+], StorageModule);
+//# sourceMappingURL=storage.module.js.map

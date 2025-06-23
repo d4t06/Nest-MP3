@@ -13,7 +13,7 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const TOKEN_EXPIRED = '1h';
-const REFRESH_EXPIRED = '1d';
+const REFRESH_EXPIRED = '30d';
 let AuthService = class AuthService {
     constructor(jwtService) {
         this.jwtService = jwtService;
@@ -23,8 +23,14 @@ let AuthService = class AuthService {
         if (!password || password !== process.env.ADMIN_PASS) {
             throw new common_1.UnauthorizedException();
         }
-        const newToken = await this.jwtService.signAsync({}, { expiresIn: TOKEN_EXPIRED });
-        const newRefreshToken = await this.jwtService.signAsync({}, { expiresIn: REFRESH_EXPIRED });
+        const newToken = await this.jwtService.signAsync({}, {
+            expiresIn: TOKEN_EXPIRED,
+            secret: process.env.JWT_SECRET,
+        });
+        const newRefreshToken = await this.jwtService.signAsync({}, {
+            expiresIn: REFRESH_EXPIRED,
+            secret: process.env.JWT_SECRET,
+        });
         return {
             token: newToken,
             refresh_token: newRefreshToken,
@@ -34,8 +40,10 @@ let AuthService = class AuthService {
         try {
             if (!token)
                 throw new common_1.UnauthorizedException();
-            await this.jwtService.verify(token);
-            const newToken = await this.jwtService.signAsync({}, { expiresIn: TOKEN_EXPIRED });
+            await this.jwtService.verifyAsync(token, {
+                secret: process.env.JWT_SECRET,
+            });
+            const newToken = await this.jwtService.signAsync({}, { expiresIn: TOKEN_EXPIRED, secret: process.env.JWT_SECRET });
             return {
                 token: newToken,
             };

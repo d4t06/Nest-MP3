@@ -21,9 +21,5 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateSongLyricDto.prototype, "base_lyric", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
 ], CreateSongLyricDto.prototype, "lyrics", void 0);
 //# sourceMappingURL=create-song-lyric.dto.js.map
